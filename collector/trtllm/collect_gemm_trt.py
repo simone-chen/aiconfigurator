@@ -2,19 +2,24 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import os
-from cuda import cuda, cudart
-import torch
+
 import tensorrt as trt
 import tensorrt_llm
-
-from polygraphy.backend.trt import (CreateConfig, EngineFromNetwork,
-                                    TrtRunner)
+import torch
+from cuda import cuda, cudart
+from helper import log_perf
+from polygraphy.backend.trt import CreateConfig, EngineFromNetwork, TrtRunner
 from tensorrt_llm import Tensor
 from tensorrt_llm._utils import str_dtype_to_torch
-from tensorrt_llm.layers import (Linear, RowLinear)
+from tensorrt_llm.layers import Linear, RowLinear
+from tensorrt_llm.quantization.layers import (
+    FP8Linear,
+    SmoothQuantLinear,
+    SmoothQuantRowLinear,
+    WeightOnlyQuantLinear,
+)
 from tensorrt_llm.quantization.mode import QuantMode
-from tensorrt_llm.quantization.layers import SmoothQuantLinear, WeightOnlyQuantLinear, SmoothQuantRowLinear, FP8Linear
-from helper import log_perf
+
 
 def get_gemm_test_cases():
     x_list = [1,2,4,8,16,32,48,64,80,96,128,160,192,256,384,512,768,1024,2048,4096,8192]
@@ -82,7 +87,7 @@ def run_gemm(gemm_type, use_plugin, m, n, k, device='cuda:0'):
     use_int8 = gemm_type == 'int8_wo' or gemm_type == 'int4_wo' or gemm_type == 'sq'
     use_fp8 = gemm_type=='fp8' or gemm_type=='fp8_ootb'
     tensor_type = 'float16'
-    x_data = torch.randn(m, k, dtype=str_dtype_to_torch(tensor_type))
+    x_data = torch.randn(m, k, dtype=str_dtype_to_torch(tensor_type), device=device)
 
     # construct trt network
     builder = tensorrt_llm.Builder()
