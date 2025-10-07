@@ -154,8 +154,8 @@ def run_attention_torch(batch_size,
         num_tokens = batch_size
     
     sinks = torch.randn(num_heads, dtype=torch.float32) if head_dim == 64 else None
-    q = torch.randn([num_tokens, num_heads*128]).bfloat16().to(torch.device(device))
-    kv = torch.randn([num_tokens, 2*num_key_value_heads*128]).bfloat16().to(torch.device(device))
+    q = torch.randn([num_tokens, num_heads*head_dim]).bfloat16().to(torch.device(device))
+    kv = torch.randn([num_tokens, 2*num_key_value_heads*head_dim]).bfloat16().to(torch.device(device))
     input_qkv = torch.concat([q, kv], dim=-1)
     attn.forward(
         input_qkv,
