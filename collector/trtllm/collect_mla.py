@@ -49,7 +49,9 @@ def get_generation_mla_test_cases():
     return test_cases
 
 def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_size, tp_size, tokens_per_block, warming_up, test_ite, is_context_phase, perf_filename, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)
+    torch.set_default_device(device)
     backend_name = "TRTLLM"
     layer_idx = 0
     head_dim = 56
@@ -182,8 +184,8 @@ def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_
     else:
         num_tokens = batch_size
 
-    compressed_kv = torch.randn([num_tokens, kv_lora_rank]).bfloat16().to(torch.device(device))
-    k_pe = torch.randn([num_tokens, qk_rope_head_dim]).bfloat16().to(torch.device(device))
+    compressed_kv = torch.randn([num_tokens, kv_lora_rank], dtype=torch.bfloat16)
+    k_pe = torch.randn([num_tokens, qk_rope_head_dim], dtype=torch.bfloat16)
 
     latent_cache = torch.cat([compressed_kv, k_pe], dim=-1)
 
@@ -208,7 +210,7 @@ def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_
             None,
             None,
             attn_metadata,
-            out_scale=torch.tensor([]).float().to(torch.device(device)),
+            out_scale=torch.tensor([], dtype=torch.float32),
             attention_input_type=AttentionInputType.context_only,
             latent_cache=latent_cache,
         )
@@ -218,7 +220,7 @@ def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_
             None,
             None,
             attn_metadata,
-            out_scale=torch.tensor([]).float().to(torch.device(device)),
+            out_scale=torch.tensor([], dtype=torch.float32),
             attention_input_type=AttentionInputType.generation_only,
             latent_cache=latent_cache,
             q_pe=q_pe,
@@ -233,7 +235,7 @@ def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_
                 None,
                 None,
                 attn_metadata,
-                out_scale=torch.tensor([]).float().to(torch.device(device)),
+                out_scale=torch.tensor([], dtype=torch.float32),
                 attention_input_type=AttentionInputType.context_only,
                 latent_cache=latent_cache,
             )
@@ -243,7 +245,7 @@ def run_mla(input_len, batch_size, output_len, kv_cache_dtype, num_heads, world_
                 None,
                 None,
                 attn_metadata,
-                out_scale=torch.tensor([]).float().to(torch.device(device)),
+                out_scale=torch.tensor([], dtype=torch.float32),
                 attention_input_type=AttentionInputType.generation_only,
                 latent_cache=latent_cache,
                 q_pe=q_pe,

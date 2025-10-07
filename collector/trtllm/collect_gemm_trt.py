@@ -80,7 +80,9 @@ class GEMMProfiler(trt.IProfiler):
         perf_filename=self._perf_filename)
 
 def run_gemm(gemm_type, use_plugin, m, n, k, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)
+    torch.set_default_device(device)
 
     #print("testing ", gemm_type, " ", m, " ", n,"  ", k)
 
@@ -155,7 +157,7 @@ def run_gemm(gemm_type, use_plugin, m, n, k, device='cuda:0'):
     profiler = GEMMProfiler(m=m, n=n, k=k, device=device, perf_filename='gemm_perf.txt', gemm_type=gemm_type)
     #l2_cache_flusher = L2CacheFlusher()
     cudart.cudaProfilerStart()
-    x_data = x_data.to(torch.device(device))
+
     with TrtRunner(build_engine) as runner:       
         outputs = runner.infer(feed_dict={'x': x_data}, check_inputs=False, copy_outputs_to_host=False)
         if use_fp8 and not use_plugin: # additional warmup for fp8 OOTB

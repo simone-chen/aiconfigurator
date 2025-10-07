@@ -1,20 +1,26 @@
 # SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+import os
+
 import tensorrt_llm
 import torch
 from cuda import cuda
-from tensorrt_llm._torch.attention_backend.utils import create_attention
-from tensorrt_llm._torch.attention_backend.interface import PositionalEmbeddingParams, RopeParams, AttentionRuntimeFeatures
-from tensorrt_llm.functional import PositionEmbeddingType
-from tensorrt_llm.models.modeling_utils import QuantConfig, QuantAlgo
-from tensorrt_llm._torch.attention_backend import TrtllmAttentionMetadata
-from tensorrt_llm.mapping import Mapping
-from tensorrt_llm._torch.pyexecutor.resource_manager import KVCacheManager
-from tensorrt_llm._torch.metadata import KVCacheParams
-from tensorrt_llm.llmapi import KvCacheConfig
-import os
 from helper import getSMVersion, log_perf
+from tensorrt_llm._torch.attention_backend import TrtllmAttentionMetadata
+from tensorrt_llm._torch.attention_backend.interface import (
+    AttentionRuntimeFeatures,
+    PositionalEmbeddingParams,
+    RopeParams,
+)
+from tensorrt_llm._torch.attention_backend.utils import create_attention
+from tensorrt_llm._torch.metadata import KVCacheParams
+from tensorrt_llm._torch.pyexecutor.resource_manager import KVCacheManager
+from tensorrt_llm.functional import PositionEmbeddingType
+from tensorrt_llm.llmapi import KvCacheConfig
+from tensorrt_llm.mapping import Mapping
+from tensorrt_llm.models.modeling_utils import QuantAlgo, QuantConfig
+
 
 def run_attention_torch(batch_size,
                         input_len,
@@ -27,7 +33,9 @@ def run_attention_torch(batch_size,
                         is_context_phase,                        
                         perf_filename,
                         device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)
+    torch.set_default_device(device)
 
     # if XQA JIT is enabled, the context phase will also trigger XQA prepare which causes the error with specifc q/kv head and seq setting.
     if is_context_phase:

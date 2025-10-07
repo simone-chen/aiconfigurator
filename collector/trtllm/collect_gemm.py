@@ -40,9 +40,11 @@ def get_gemm_test_cases():
 
 
 def run_gemm(gemm_type, m, n, k, perf_filename, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)
+    torch.set_default_device(device)
     dtype = torch.bfloat16
-    x = torch.randn((m, k), dtype=dtype).to(torch.device(device))
+    x = torch.randn((m, k), dtype=dtype)
 
     if gemm_type == 'fp8':
         qc = QuantConfig(quant_algo=QuantAlgo.FP8)
@@ -67,15 +69,15 @@ def run_gemm(gemm_type, m, n, k, perf_filename, device='cuda:0'):
         )
 
         if gemm_type == 'fp8':
-            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16, device=torch.device(device)).to(dtype=torch.float8_e4m3fn),
-                       'weight_scale': torch.randn(1, dtype=torch.float32, device=torch.device(device))}
+            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16).to(dtype=torch.float8_e4m3fn),
+                       'weight_scale': torch.randn(1, dtype=torch.float32)}
         elif gemm_type == 'fp8_block':
-            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16, device=torch.device(device)).to(dtype=torch.float8_e4m3fn),
-                       'weight_scale': torch.randn((math.ceil(n/group_size), math.ceil(k/group_size)), dtype=torch.float32, device=torch.device(device))}
+            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16).to(dtype=torch.float8_e4m3fn),
+                       'weight_scale': torch.randn((math.ceil(n/group_size), math.ceil(k/group_size)), dtype=torch.float32)}
         elif gemm_type == 'nvfp4':
             # From trtllm test case
             x_sf_global = (448 * 6) / x.abs().max().float()
-            w = torch.randn((n, k), dtype=torch.float16, device=torch.device(device))
+            w = torch.randn((n, k), dtype=torch.float16)
             w_sf_global = (448 * 6) / w.abs().max().float()
             w_fp4, w_sf_block = torch.ops.trtllm.fp4_quantize(w, w_sf_global, 16, False)
             w_sf_block_unswizzled = (
@@ -86,7 +88,7 @@ def run_gemm(gemm_type, m, n, k, perf_filename, device='cuda:0'):
                        'weight_scale_2': 1.0 / w_sf_global.cpu(),
                        'input_scale': 1.0 / x_sf_global.cpu()}
         else:
-            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16, device=torch.device(device))}
+            weights = {'weight': torch.randn((n, k), dtype=torch.bfloat16)}
 
         gemm.load_weights([weights])
         gemm.to(torch.device(device))

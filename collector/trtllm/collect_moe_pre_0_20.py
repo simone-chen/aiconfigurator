@@ -87,6 +87,7 @@ def get_moe_test_cases():
     return test_cases
 
 def run_moe_torch(moe_type, num_tokens, hidden_size, inter_size, topk, num_experts, moe_tp_size, moe_ep_size, cutlass_min_latency_mode, perf_filename, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)
     torch.set_default_device(device)
 
@@ -141,11 +142,11 @@ def run_moe_torch(moe_type, num_tokens, hidden_size, inter_size, topk, num_exper
             False,  # In both low latency and attention dp scenarios, FusedMoE needs not to do allreduce inside op.
             model_config=model_config)
 
-    hidden_states = torch.randn([num_tokens, hidden_size]).bfloat16().to(torch.device(device))
-    router_logits = balanced_logits(num_tokens, num_experts, topk).bfloat16().to(torch.device(device))
+    hidden_states = torch.randn([num_tokens, hidden_size], dtype=torch.bfloat16)
+    router_logits = balanced_logits(num_tokens, num_experts, topk).bfloat16()
 
-    ffn1_weights = Parameter(torch.randn(moe.w3_w1_weight.shape, dtype=torch.bfloat16, device=torch.device(device)).to(dtype=moe.w3_w1_weight.dtype), requires_grad=False)
-    ffn2_weights = Parameter(torch.randn(moe.w2_weight.shape, dtype=torch.bfloat16, device=torch.device(device)).to(dtype=moe.w2_weight.dtype), requires_grad=False)
+    ffn1_weights = Parameter(torch.randn(moe.w3_w1_weight.shape, dtype=torch.bfloat16).to(dtype=moe.w3_w1_weight.dtype), requires_grad=False)
+    ffn2_weights = Parameter(torch.randn(moe.w2_weight.shape, dtype=torch.bfloat16).to(dtype=moe.w2_weight.dtype), requires_grad=False)
 
     moe.w3_w1_weight = ffn1_weights
     moe.w2_weight = ffn2_weights

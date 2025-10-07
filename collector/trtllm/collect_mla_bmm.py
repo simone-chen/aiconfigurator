@@ -35,6 +35,7 @@ def get_mla_gen_post_test_cases():
     return test_cases
 
 def run_mla_gen_pre(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_filename, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)    
     torch.set_default_device(device)
     
@@ -43,9 +44,9 @@ def run_mla_gen_pre(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_fi
     kv_lora_rank = 512
     # record graph
     if dtype == 'float16':
-        q_nope = torch.randn([num_tokens, num_heads, qk_nope_head_dim]).bfloat16().to(torch.device(device))
-        k_b_proj_trans = torch.randn([num_heads, kv_lora_rank, qk_nope_head_dim]).bfloat16().to(torch.device(device))
-        out = torch.randn([num_tokens, num_heads, kv_lora_rank]).bfloat16().to(torch.device(device))
+        q_nope = torch.randn([num_tokens, num_heads, qk_nope_head_dim], dtype=torch.bfloat16)
+        k_b_proj_trans = torch.randn([num_heads, kv_lora_rank, qk_nope_head_dim], dtype=torch.bfloat16)
+        out = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16)
         # => num_heads, num_tokens, kv_lora_rank
 
         q_nope_trans = q_nope.transpose(0, 1)
@@ -59,12 +60,12 @@ def run_mla_gen_pre(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_fi
             out_trans = out.transpose(0, 1)
             torch.ops.trtllm.bmm_out(q_nope_trans, k_b_proj_trans_trans, out_trans)
     elif dtype == 'fp8':
-        q_nope = torch.randn([num_tokens, num_heads, qk_nope_head_dim], dtype=torch.bfloat16).to(torch.device(device))
-        #q_nope_fp8 = torch.randn([num_heads, num_tokens, qk_nope_head_dim], dtype=torch.bfloat16, device=device).to(dtype=torch.float8_e4m3fn)
-        k_b_proj_trans = torch.randn([num_heads, kv_lora_rank, qk_nope_head_dim], dtype=torch.bfloat16, device=device).to(dtype=torch.float8_e4m3fn)
-        k_b_proj_trans_scale = torch.randn([num_heads, kv_lora_rank//128, qk_nope_head_dim//128], dtype=torch.float32, device=device)
-        #q_nope_out = torch.randn([num_heads, num_tokens, kv_lora_rank]).bfloat16().to(torch.device(device))
-        fused_q = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16, device=device)
+        q_nope = torch.randn([num_tokens, num_heads, qk_nope_head_dim], dtype=torch.bfloat16)
+        #q_nope_fp8 = torch.randn([num_heads, num_tokens, qk_nope_head_dim], dtype=torch.bfloat16).to(dtype=torch.float8_e4m3fn)
+        k_b_proj_trans = torch.randn([num_heads, kv_lora_rank, qk_nope_head_dim], dtype=torch.bfloat16).to(dtype=torch.float8_e4m3fn)
+        k_b_proj_trans_scale = torch.randn([num_heads, kv_lora_rank//128, qk_nope_head_dim//128], dtype=torch.float32)
+        #q_nope_out = torch.randn([num_heads, num_tokens, kv_lora_rank]).bfloat16()
+        fused_q = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16)
         # => num_heads, num_tokens, kv_lora_rank
         q_nope_fp8, q_nope_scales = torch.ops.trtllm.fp8_batched_quantize_1x128_permute102(
                         q_nope)
@@ -112,6 +113,7 @@ def run_mla_gen_pre(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_fi
     perf_filename=perf_filename)
 
 def run_mla_gen_post(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_filename, device='cuda:0'):
+    device = torch.device(device)
     torch.cuda.set_device(device)    
     torch.set_default_device(device)
     
@@ -121,19 +123,19 @@ def run_mla_gen_post(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_f
     v_head_dim = 128
     # record graph
     if dtype == 'float16':
-        attn_out_latent = torch.randn([num_tokens, num_heads, kv_lora_rank]).bfloat16().to(torch.device(device))
-        v_b_proj = torch.randn([num_heads, v_head_dim, kv_lora_rank]).bfloat16().to(torch.device(device))
-        attn_output = torch.randn([num_tokens, num_heads, v_head_dim]).bfloat16().to(torch.device(device))
+        attn_out_latent = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16)
+        v_b_proj = torch.randn([num_heads, v_head_dim, kv_lora_rank], dtype=torch.bfloat16)
+        attn_output = torch.randn([num_tokens, num_heads, v_head_dim], dtype=torch.bfloat16)
     
         torch.ops.trtllm.bmm_out(attn_out_latent.transpose(0, 1), v_b_proj.transpose(1, 2), attn_output.transpose(0, 1))
         g = torch.cuda.CUDAGraph()
         with torch.cuda.graph(g):
             torch.ops.trtllm.bmm_out(attn_out_latent.transpose(0, 1), v_b_proj.transpose(1, 2), attn_output.transpose(0, 1))
     elif dtype == 'fp8':
-        attn_out_latent = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16, device=device)
-        v_b_proj = torch.randn([num_heads, v_head_dim, kv_lora_rank], dtype=torch.bfloat16, device=device).to(dtype=torch.float8_e4m3fn)
-        v_b_proj_scale = torch.randn([num_heads, v_head_dim//128, kv_lora_rank//128], dtype=torch.float32, device=device)
-        attn_output = torch.randn([num_tokens, num_heads, v_head_dim]).bfloat16().to(torch.device(device))
+        attn_out_latent = torch.randn([num_tokens, num_heads, kv_lora_rank], dtype=torch.bfloat16)
+        v_b_proj = torch.randn([num_heads, v_head_dim, kv_lora_rank], dtype=torch.bfloat16).to(dtype=torch.float8_e4m3fn)
+        v_b_proj_scale = torch.randn([num_heads, v_head_dim//128, kv_lora_rank//128], dtype=torch.float32)
+        attn_output = torch.randn([num_tokens, num_heads, v_head_dim], dtype=torch.bfloat16)
 
         # dry run
         attn_out_latent_fp8, attn_out_latent_scales = torch.ops.trtllm.fp8_batched_quantize_1x128_permute102(attn_out_latent)
