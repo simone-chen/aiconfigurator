@@ -1,0 +1,61 @@
+[2025-10-07 23:28:16,114] [INFO] [Worker-0] [worker_0] Worker 0 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,134] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,146] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,151] [INFO] [Worker-2] [worker_2] Worker 2 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,155] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,179] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,179] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.gemm_trt
+[2025-10-07 23:28:18,183] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.gemm_trt
+Process Process-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/aiconfigurator/collector/collect.py", line 120, in worker
+    result = func(*task, device)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/aiconfigurator/collector/trtllm/collect_gemm_trt.py", line 161, in run_gemm
+    with TrtRunner(build_engine) as runner:
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/base/runner.py", line 62, in __enter__
+    self.activate()
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/base/runner.py", line 97, in activate
+    self.activate_impl()
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 710, in wrapped
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/trt/runner.py", line 174, in activate_impl
+    engine_or_context, _ = util.invoke_if_callable(self._engine_or_context)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 678, in invoke_if_callable
+    ret = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/base/loader.py", line 40, in __call__
+    return self.call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 710, in wrapped
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/trt/loader.py", line 624, in call_impl
+    return engine_from_bytes(super().call_impl, runtime=self._runtime)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in engine_from_bytes
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/base/loader.py", line 40, in __call__
+    return self.call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 710, in wrapped
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/trt/loader.py", line 653, in call_impl
+    buffer, _ = util.invoke_if_callable(self._serialized_engine)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 678, in invoke_if_callable
+    ret = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/util/util.py", line 710, in wrapped
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/polygraphy/backend/trt/loader.py", line 548, in call_impl
+    engine_bytes = builder.build_serialized_network(network, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

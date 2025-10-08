@@ -1,0 +1,1558 @@
+[2025-10-07 23:39:06,494] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:39:06,509] [INFO] [Worker-0] [worker_0] Worker 0 initialized for trtllm.attention_context
+[2025-10-07 23:39:06,517] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:39:06,625] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.attention_context
+[2025-10-07 23:39:07,171] [INFO] [Worker-2] [worker_2] Worker 2 initialized for trtllm.attention_context
+[2025-10-07 23:39:07,173] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:39:07,173] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:39:07,174] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.attention_context
+[2025-10-07 23:48:21,563] [ERROR] [Worker-7] [worker_7] Task trtllm.attention_context_run_attention_torch_83548_[8, 16384, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:48:21,563|ERROR|Worker-worker_7|worker|Task trtllm.attention_context_run_attention_torch_83548_[8, 16384, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f2e13ac308b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f2e13c2fa02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f2fde652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f2e1474d830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f2fde652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f2e14736a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f2e1474aafa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f2fde6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f2fde6b1e3b]
+9       0x7f2fde652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f2fde6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f2fde6a5cea]
+11      0x7f2fde65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f2fde65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f31463a91ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f31463a91ca]
+28      0x7f31463a928b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:48:21,953] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_80327_[8, 16384, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:48:21,953|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_80327_[8, 16384, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f36c3cc308b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f36c3e2fa02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f3896652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f36c494d830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f3896652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f36c4936a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f36c494aafa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f38966b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f38966b1e3b]
+9       0x7f3896652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f38966a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f38966a5cea]
+11      0x7f389665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f389665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f39f64901ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f39f64901ca]
+28      0x7f39f649028b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:48:22,768] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_94233_[8, 16384, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:48:22,768|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_94233_[8, 16384, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7faff20b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7faff221ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fb042652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7faff2d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fb042652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7faff2d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7faff2d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fb0426b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fb0426b1e3b]
+9       0x7fb042652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fb0426a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fb0426a5cea]
+11      0x7fb04265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fb04265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fb1bbf4e1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fb1bbf4e1ca]
+28      0x7fb1bbf4e28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:48:24,010|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:48:24,014|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:48:24,017|ERROR|root|create_process_exit_error|Process 7 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:48:24,200] [ERROR] [Worker-6] [worker_6] Task trtllm.attention_context_run_attention_torch_36785_[8, 16384, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:48:24,200|ERROR|Worker-worker_6|worker|Task trtllm.attention_context_run_attention_torch_36785_[8, 16384, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fe9ae5b408b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fe9ae720a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fea5e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fe9af23e830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fea5e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fe9af227a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fe9af23bafa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fea5e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fea5e6b1e3b]
+9       0x7fea5e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fea5e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fea5e6a5cea]
+11      0x7fea5e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fea5e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7febc0b921ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7febc0b921ca]
+28      0x7febc0b9228b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:48:26,022|ERROR|root|create_process_exit_error|Process 6 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:48:35,360] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:48:35,752] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:48:35,757] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:48:37,268] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:49:16,329] [ERROR] [Worker-3] [worker_3] Task trtllm.attention_context_run_attention_torch_65513_[16, 8192, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:16,329|ERROR|Worker-worker_3|worker|Task trtllm.attention_context_run_attention_torch_65513_[16, 8192, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fcd55ce508b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fcd55e51a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fcf26652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fcd5696f830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fcf26652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fcd56958a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fcd5696cafa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fcf266b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fcf266b1e3b]
+9       0x7fcf26652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fcf266a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fcf266a5cea]
+11      0x7fcf2665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fcf2665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fd0885f21ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fd0885f21ca]
+28      0x7fd0885f228b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:49:16,609] [ERROR] [Worker-6] [worker_6] Task trtllm.attention_context_run_attention_torch_28535_[16, 8192, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:16,609|ERROR|Worker-worker_6|worker|Task trtllm.attention_context_run_attention_torch_28535_[16, 8192, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f1c8c0ed08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f1c8c259a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f1dca652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f1c8cd77830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f1dca652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f1c8cd60a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f1c8cd74afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f1dca6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f1dca6b1e3b]
+9       0x7f1dca652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f1dca6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f1dca6a5cea]
+11      0x7f1dca65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f1dca65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f1fbe8fe1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f1fbe8fe1ca]
+28      0x7f1fbe8fe28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:49:17,453] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_52496_[16, 8192, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:17,453|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_52496_[16, 8192, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f816ba0f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f816bb7ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f82de652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f816c699830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f82de652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f816c682a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f816c696afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f82de6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f82de6b1e3b]
+9       0x7f82de652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f82de6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f82de6a5cea]
+11      0x7f82de65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f82de65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f849e3391ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f849e3391ca]
+28      0x7f849e33928b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:49:18,042|ERROR|root|create_process_exit_error|Process 3 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:49:18,045|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:49:18,049|ERROR|root|create_process_exit_error|Process 6 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:49:18,564] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_46433_[16, 8192, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:18,564|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_46433_[16, 8192, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f32be60f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f32be77ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f347a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f32bf299830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f347a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f32bf282a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f32bf296afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f347a6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f347a6b1e3b]
+9       0x7f347a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f347a6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f347a6a5cea]
+11      0x7f347a65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f347a65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f35f0f4e1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f35f0f4e1ca]
+28      0x7f35f0f4e28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:49:20,056|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:49:29,566] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.attention_context
+[2025-10-07 23:49:29,774] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:49:29,774] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:49:31,311] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:49:37,781] [ERROR] [Worker-7] [worker_7] Task trtllm.attention_context_run_attention_torch_60908_[16, 6144, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:37,781|ERROR|Worker-worker_7|worker|Task trtllm.attention_context_run_attention_torch_60908_[16, 6144, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f0b0610f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f0b0627ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f0ccc651387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f0b06d99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f0ccc651387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f0b06d82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f0b06d96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f0ccc6b0e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f0ccc6b0e3b]
+9       0x7f0ccc651387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f0ccc6a4cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f0ccc6a4cea]
+11      0x7f0ccc65c32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f0ccc65c32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f0e389781ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f0e389781ca]
+28      0x7f0e3897828b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:49:38,608] [ERROR] [Worker-2] [worker_2] Task trtllm.attention_context_run_attention_torch_96158_[16, 6144, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:38,608|ERROR|Worker-worker_2|worker|Task trtllm.attention_context_run_attention_torch_96158_[16, 6144, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2025-10-07 23:49:38,609] [ERROR] [Worker-0] [worker_0] Task trtllm.attention_context_run_attention_torch_53955_[16, 6144, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:38,609|ERROR|Worker-worker_0|worker|Task trtllm.attention_context_run_attention_torch_53955_[16, 6144, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f992620f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f992637ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f9af6652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f9926e99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f9af6652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f9926e82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f9926e96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f9af66b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f9af66b1e3b]
+9       0x7f9af6652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f9af66a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f9af66a5cea]
+11      0x7f9af665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f9af665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f9c58a261ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f9c58a261ca]
+28      0x7f9c58a2628b __libc_start_main + 139
+29            0x657ce5 _start + 37
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7ff2920b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7ff29221ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7ff2e2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7ff292d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7ff2e2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7ff292d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7ff292d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7ff2e26b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7ff2e26b1e3b]
+9       0x7ff2e2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7ff2e26a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7ff2e26a5cea]
+11      0x7ff2e265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7ff2e265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7ff5dcdf21ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7ff5dcdf21ca]
+28      0x7ff5dcdf228b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:49:39,643] [ERROR] [Worker-1] [worker_1] Task trtllm.attention_context_run_attention_torch_37150_[16, 6144, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:49:39,643|ERROR|Worker-worker_1|worker|Task trtllm.attention_context_run_attention_torch_37150_[16, 6144, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f9c220b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f9c2221ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f9c72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f9c22d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f9c72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f9c22d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f9c22d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f9c726b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f9c726b1e3b]
+9       0x7f9c72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f9c726a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f9c726a5cea]
+11      0x7f9c7265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f9c7265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f9f668831ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f9f668831ca]
+28      0x7f9f6688328b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:49:40,080|ERROR|root|create_process_exit_error|Process 0 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:49:40,084|ERROR|root|create_process_exit_error|Process 1 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:49:40,087|ERROR|root|create_process_exit_error|Process 2 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:49:40,091|ERROR|root|create_process_exit_error|Process 7 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:49:51,806] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:49:51,935] [INFO] [Worker-0] [worker_0] Worker 0 initialized for trtllm.attention_context
+[2025-10-07 23:49:52,261] [INFO] [Worker-2] [worker_2] Worker 2 initialized for trtllm.attention_context
+[2025-10-07 23:49:52,271] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.attention_context
+[2025-10-07 23:50:00,295] [ERROR] [Worker-6] [worker_6] Task trtllm.attention_context_run_attention_torch_12522_[32, 4096, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:00,295|ERROR|Worker-worker_6|worker|Task trtllm.attention_context_run_attention_torch_12522_[32, 4096, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f7fc27cd08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f7fc2939a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f8138652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f7fc3457830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f8138652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f7fc3440a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f7fc3454afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f81386b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f81386b1e3b]
+9       0x7f8138652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f81386a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f81386a5cea]
+11      0x7f813865d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f813865d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f82f50841ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f82f50841ca]
+28      0x7f82f508428b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:02,110|ERROR|root|create_process_exit_error|Process 6 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:02,118] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_7722_[32, 4096, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:02,118|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_7722_[32, 4096, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fba466cd08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fba46839a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fbbbc652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fba47357830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fbbbc652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fba47340a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fba47354afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fbbbc6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fbbbc6b1e3b]
+9       0x7fbbbc652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fbbbc6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fbbbc6a5cea]
+11      0x7fbbbc65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fbbbc65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fbd78f971ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fbd78f971ca]
+28      0x7fbd78f9728b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:50:02,655] [ERROR] [Worker-3] [worker_3] Task trtllm.attention_context_run_attention_torch_8848_[32, 4096, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:02,655|ERROR|Worker-worker_3|worker|Task trtllm.attention_context_run_attention_torch_8848_[32, 4096, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fb1d60b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fb1d621ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fb226652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fb1d6d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fb226652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fb1d6d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fb1d6d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fb2266b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fb2266b1e3b]
+9       0x7fb226652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fb2266a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fb2266a5cea]
+11      0x7fb22665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fb22665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fb51f6671ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fb51f6671ca]
+28      0x7fb51f66728b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:50:04,010] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_64790_[32, 4096, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:04,010|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_64790_[32, 4096, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f524100f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f524117ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f53a0652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f5241c99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f53a0652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f5241c82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f5241c96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f53a06b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f53a06b1e3b]
+9       0x7f53a0652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f53a06a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f53a06a5cea]
+11      0x7f53a065d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f53a065d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f55739241ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f55739241ca]
+28      0x7f557392428b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:04,114|ERROR|root|create_process_exit_error|Process 3 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:04,118|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:06,122|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:13,368] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:50:15,672] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:50:15,693] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.attention_context
+[2025-10-07 23:50:17,544] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:50:25,172] [ERROR] [Worker-2] [worker_2] Task trtllm.attention_context_run_attention_torch_67170_[32, 3072, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:25,172|ERROR|Worker-worker_2|worker|Task trtllm.attention_context_run_attention_torch_67170_[32, 3072, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f46a5a0f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f46a5b7ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f4872652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f46a6699830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f4872652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f46a6682a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f46a6696afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f48726b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f48726b1e3b]
+9       0x7f4872652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f48726a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f48726a5cea]
+11      0x7f487265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f487265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f49d83291ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f49d83291ca]
+28      0x7f49d832928b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:50:25,739] [ERROR] [Worker-7] [worker_7] Task trtllm.attention_context_run_attention_torch_95583_[32, 3072, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2025-10-07 23:50:25,739] [ERROR] [Worker-1] [worker_1] Task trtllm.attention_context_run_attention_torch_61998_[32, 3072, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:25,739|ERROR|Worker-worker_7|worker|Task trtllm.attention_context_run_attention_torch_95583_[32, 3072, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:25,739|ERROR|Worker-worker_1|worker|Task trtllm.attention_context_run_attention_torch_61998_[32, 3072, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f6d9169e08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f6d9180aa02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f6e7e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f6d92328830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f6e7e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f6d92311a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f6d92325afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f6e7e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f6e7e6b1e3b]
+9       0x7f6e7e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f6e7e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f6e7e6a5cea]
+11      0x7f6e7e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f6e7e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f70c3f731ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f70c3f731ca]
+28      0x7f70c3f7328b __libc_start_main + 139
+29            0x657ce5 _start + 37
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f38820b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f388221ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f38d2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f3882d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f38d2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f3882d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f3882d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f38d26b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f38d26b1e3b]
+9       0x7f38d2652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f38d26a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f38d26a5cea]
+11      0x7f38d265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f38d265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f3bce1de1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f3bce1de1ca]
+28      0x7f3bce1de28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:26,135|ERROR|root|create_process_exit_error|Process 1 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:26,139|ERROR|root|create_process_exit_error|Process 2 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:26,142|ERROR|root|create_process_exit_error|Process 7 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:28,186] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_5729_[32, 3072, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:28,186|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_5729_[32, 3072, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7efffd00f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7efffd17ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f0176652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7efffdc99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f0176652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7efffdc82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7efffdc96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f01766b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f01766b1e3b]
+9       0x7f0176652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f01766a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f01766a5cea]
+11      0x7f017665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f017665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f032f9261ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f032f9261ca]
+28      0x7f032f92628b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:30,146|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:37,898] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:50:37,949] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.attention_context
+[2025-10-07 23:50:37,994] [INFO] [Worker-2] [worker_2] Worker 2 initialized for trtllm.attention_context
+[2025-10-07 23:50:42,070] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:50:47,497] [ERROR] [Worker-3] [worker_3] Task trtllm.attention_context_run_attention_torch_18983_[64, 2048, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:47,497|ERROR|Worker-worker_3|worker|Task trtllm.attention_context_run_attention_torch_18983_[64, 2048, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f5240a0f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f5240b7ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f53ac652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f5241699830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f53ac652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f5241682a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f5241696afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f53ac6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f53ac6b1e3b]
+9       0x7f53ac652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f53ac6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f53ac6a5cea]
+11      0x7f53ac65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f53ac65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f55732411ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f55732411ca]
+28      0x7f557324128b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:50:47,744] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_77572_[64, 2048, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:47,744|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_77572_[64, 2048, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f96f9ce508b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f96f9e51a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f9836652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f96fa96f830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f9836652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f96fa958a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f96fa96cafa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f98366b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f98366b1e3b]
+9       0x7f9836652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f98366a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f98366a5cea]
+11      0x7f983665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f983665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f9a2c5c31ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f9a2c5c31ca]
+28      0x7f9a2c5c328b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:48,159|ERROR|root|create_process_exit_error|Process 3 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:48,163|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:48,567] [ERROR] [Worker-6] [worker_6] Task trtllm.attention_context_run_attention_torch_51735_[64, 2048, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:48,567|ERROR|Worker-worker_6|worker|Task trtllm.attention_context_run_attention_torch_51735_[64, 2048, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f404a70f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f404a87ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f418e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f404b399830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f418e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f404b382a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f404b396afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f418e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f418e6b1e3b]
+9       0x7f418e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f418e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f418e6a5cea]
+11      0x7f418e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f418e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f437d0451ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f437d0451ca]
+28      0x7f437d04528b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:50:49,402] [ERROR] [Worker-0] [worker_0] Task trtllm.attention_context_run_attention_torch_80364_[64, 2048, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:50:49,402|ERROR|Worker-worker_0|worker|Task trtllm.attention_context_run_attention_torch_80364_[64, 2048, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7ff7c680f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7ff7c697ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7ff91a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7ff7c7499830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7ff91a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7ff7c7482a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7ff7c7496afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7ff91a6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7ff91a6b1e3b]
+9       0x7ff91a652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7ff91a6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7ff91a6a5cea]
+11      0x7ff91a65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7ff91a65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7ffaf91401ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7ffaf91401ca]
+28      0x7ffaf914028b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:50:50,167|ERROR|root|create_process_exit_error|Process 0 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:50:50,170|ERROR|root|create_process_exit_error|Process 6 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:50:59,596] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:50:59,890] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.attention_context
+[2025-10-07 23:51:01,628] [INFO] [Worker-0] [worker_0] Worker 0 initialized for trtllm.attention_context
+[2025-10-07 23:51:01,785] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:51:11,183] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_13671_[64, 1536, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:11,183|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_13671_[64, 1536, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f6054aed08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f6054c59a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f619e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f6055777830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f619e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f6055760a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f6055774afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f619e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f619e6b1e3b]
+9       0x7f619e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f619e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f619e6a5cea]
+11      0x7f619e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f619e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f63872e81ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f63872e81ca]
+28      0x7f63872e828b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:51:12,007] [ERROR] [Worker-3] [worker_3] Task trtllm.attention_context_run_attention_torch_16353_[64, 1536, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:12,007|ERROR|Worker-worker_3|worker|Task trtllm.attention_context_run_attention_torch_16353_[64, 1536, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fbdeeba008b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fbdeed0ca02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fbf3e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fbdef82a830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fbf3e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fbdef813a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fbdef827afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fbf3e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fbf3e6b1e3b]
+9       0x7fbf3e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fbf3e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fbf3e6a5cea]
+11      0x7fbf3e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fbf3e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fc1214541ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fc1214541ca]
+28      0x7fc12145428b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:51:12,184|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:51:12,587] [ERROR] [Worker-7] [worker_7] Task trtllm.attention_context_run_attention_torch_60523_[64, 1536, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:12,587|ERROR|Worker-worker_7|worker|Task trtllm.attention_context_run_attention_torch_60523_[64, 1536, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2025-10-07 23:51:12,589] [ERROR] [Worker-6] [worker_6] Task trtllm.attention_context_run_attention_torch_80857_[64, 1536, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:12,589|ERROR|Worker-worker_6|worker|Task trtllm.attention_context_run_attention_torch_80857_[64, 1536, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7efa8190f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7efa81a7ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7efb72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7efa82599830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7efb72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7efa82582a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7efa82596afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7efb726b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7efb726b1e3b]
+9       0x7efb72652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7efb726a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7efb726a5cea]
+11      0x7efb7265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7efb7265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7efdb42631ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7efdb42631ca]
+28      0x7efdb426328b __libc_start_main + 139
+29            0x657ce5 _start + 37
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fa82c3ed08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fa82c559a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fa98e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fa82d077830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fa98e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fa82d060a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fa82d074afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fa98e6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fa98e6b1e3b]
+9       0x7fa98e652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fa98e6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fa98e6a5cea]
+11      0x7fa98e65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fa98e65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fab5ecff1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fab5ecff1ca]
+28      0x7fab5ecff28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:51:14,189|ERROR|root|create_process_exit_error|Process 3 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:51:14,192|ERROR|root|create_process_exit_error|Process 6 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:51:14,196|ERROR|root|create_process_exit_error|Process 7 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:51:23,867] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:51:25,728] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:51:25,883] [INFO] [Worker-3] [worker_3] Worker 3 initialized for trtllm.attention_context
+[2025-10-07 23:51:26,174] [INFO] [Worker-6] [worker_6] Worker 6 initialized for trtllm.attention_context
+[2025-10-07 23:51:33,837] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_20653_[128, 1024, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:33,837|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_20653_[128, 1024, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f82c0bed08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f82c0d59a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f8492652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f82c1877830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f8492652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f82c1860a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f82c1874afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f84926b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f84926b1e3b]
+9       0x7f8492652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f84926a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f84926a5cea]
+11      0x7f849265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f849265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f85f33b71ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f85f33b71ca]
+28      0x7f85f33b728b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:51:33,851] [ERROR] [Worker-1] [worker_1] Task trtllm.attention_context_run_attention_torch_9006_[128, 1024, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:33,851|ERROR|Worker-worker_1|worker|Task trtllm.attention_context_run_attention_torch_9006_[128, 1024, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fe16e2cd08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fe16e439a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fe2ba652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fe16ef57830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fe2ba652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fe16ef40a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fe16ef54afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fe2ba6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fe2ba6b1e3b]
+9       0x7fe2ba652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fe2ba6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fe2ba6a5cea]
+11      0x7fe2ba65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fe2ba65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fe4a0af61ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fe4a0af61ca]
+28      0x7fe4a0af628b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:51:34,205|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:51:36,210|ERROR|root|create_process_exit_error|Process 1 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:51:36,281] [ERROR] [Worker-0] [worker_0] Task trtllm.attention_context_run_attention_torch_60448_[128, 1024, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:36,281|ERROR|Worker-worker_0|worker|Task trtllm.attention_context_run_attention_torch_60448_[128, 1024, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7fbcbd29e08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7fbcbd40aa02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7fbe68652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7fbcbdf28830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7fbe68652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7fbcbdf11a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7fbcbdf25afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7fbe686b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7fbe686b1e3b]
+9       0x7fbe68652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7fbe686a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7fbe686a5cea]
+11      0x7fbe6865d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7fbe6865d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7fbfefbc61ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fbfefbc61ca]
+28      0x7fbfefbc628b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:51:37,365] [ERROR] [Worker-2] [worker_2] Task trtllm.attention_context_run_attention_torch_52331_[128, 1024, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:51:37,365|ERROR|Worker-worker_2|worker|Task trtllm.attention_context_run_attention_torch_52331_[128, 1024, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f29b0e0f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f29b0f7ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f2b06652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f29b1a99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f2b06652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f29b1a82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f29b1a96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f2b066b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f2b066b1e3b]
+9       0x7f2b06652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f2b066a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f2b066a5cea]
+11      0x7f2b0665d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f2b0665d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f2ce37451ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f2ce37451ca]
+28      0x7f2ce374528b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:51:38,215|ERROR|root|create_process_exit_error|Process 0 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:51:38,218|ERROR|root|create_process_exit_error|Process 2 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:51:46,512] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:51:47,855] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.attention_context
+[2025-10-07 23:51:49,962] [INFO] [Worker-0] [worker_0] Worker 0 initialized for trtllm.attention_context
+[2025-10-07 23:51:50,051] [INFO] [Worker-2] [worker_2] Worker 2 initialized for trtllm.attention_context
+[2025-10-07 23:52:01,401] [ERROR] [Worker-7] [worker_7] Task trtllm.attention_context_run_attention_torch_60499_[256, 512, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:52:01,401|ERROR|Worker-worker_7|worker|Task trtllm.attention_context_run_attention_torch_60499_[256, 512, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f950df0f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f950e07ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f9652652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f950eb99830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f9652652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f950eb82a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f950eb96afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f96526b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f96526b1e3b]
+9       0x7f9652652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f96526a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f96526a5cea]
+11      0x7f965265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f965265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f98407211ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f98407211ca]
+28      0x7f984072128b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:52:01,575] [ERROR] [Worker-5] [worker_5] Task trtllm.attention_context_run_attention_torch_47965_[256, 512, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:52:01,575|ERROR|Worker-worker_5|worker|Task trtllm.attention_context_run_attention_torch_47965_[256, 512, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f6bc20b208b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f6bc221ea02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f6c12652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f6bc2d3c830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f6c12652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f6bc2d25a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f6bc2d39afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f6c126b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f6c126b1e3b]
+9       0x7f6c12652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f6c126a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f6c126a5cea]
+11      0x7f6c1265d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f6c1265d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f6e0193c1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f6e0193c1ca]
+28      0x7f6e0193c28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:52:02,230|ERROR|root|create_process_exit_error|Process 5 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:52:02,234|ERROR|root|create_process_exit_error|Process 7 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:52:02,648] [ERROR] [Worker-4] [worker_4] Task trtllm.attention_context_run_attention_torch_44272_[256, 512, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:52:02,648|ERROR|Worker-worker_4|worker|Task trtllm.attention_context_run_attention_torch_44272_[256, 512, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f336550f08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f336567ba02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f34aa652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f3366199830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f34aa652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f3366182a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f3366196afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f34aa6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f34aa6b1e3b]
+9       0x7f34aa652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f34aa6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f34aa6a5cea]
+11      0x7f34aa65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f34aa65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f3697e221ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f3697e221ca]
+28      0x7f3697e2228b __libc_start_main + 139
+29            0x657ce5 _start + 37
+[2025-10-07 23:52:04,141] [ERROR] [Worker-1] [worker_1] Task trtllm.attention_context_run_attention_torch_28764_[256, 512, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-10-07 23:52:04,141|ERROR|Worker-worker_1|worker|Task trtllm.attention_context_run_attention_torch_28764_[256, 512, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt'] failed: RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] CUDA runtime error in ::cudaStreamDestroy(stream): an illegal memory access was encountered (../include/tensorrt_llm/runtime/cudaStream.h:128)
+1       0x7f37d0aed08b void tensorrt_llm::common::check<cudaError>(cudaError, char const*, char const*, int) + 139
+2       0x7f37d0c59a02 std::_Sp_counted_ptr_inplace<tensorrt_llm::runtime::CudaStream, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 98
+3       0x7f390c652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+4       0x7f37d1777830 std::_Sp_counted_ptr_inplace<tensorrt_llm::batch_manager::kv_cache_manager::KVCacheTransferManager, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose() + 96
+5       0x7f390c652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+6       0x7f37d1760a72 tensorrt_llm::batch_manager::kv_cache_manager::WindowBlockManager::~WindowBlockManager() + 354
+7       0x7f37d1774afa tensorrt_llm::batch_manager::kv_cache_manager::KVCacheManager::~KVCacheManager() + 282
+8       0x7f390c6b1e3b /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4cbe3b) [0x7f390c6b1e3b]
+9       0x7f390c652387 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() + 103
+10      0x7f390c6a5cea /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x4bfcea) [0x7f390c6a5cea]
+11      0x7f390c65d32a /usr/local/lib/python3.12/dist-packages/tensorrt_llm/bindings.cpython-312-x86_64-linux-gnu.so(+0x47732a) [0x7f390c65d32a]
+12            0x579d52 /usr/bin/python() [0x579d52]
+13            0x59f0b9 /usr/bin/python() [0x59f0b9]
+14            0x5761fe /usr/bin/python() [0x5761fe]
+15            0x575f4c /usr/bin/python() [0x575f4c]
+16            0x59f295 /usr/bin/python() [0x59f295]
+17            0x559121 /usr/bin/python() [0x559121]
+18            0x610bf5 /usr/bin/python() [0x610bf5]
+19            0x610c05 /usr/bin/python() [0x610c05]
+20            0x55350b /usr/bin/python() [0x55350b]
+21            0x5dfc10 _PyEval_EvalFrameDefault + 37584
+22            0x5d58eb PyEval_EvalCode + 347
+23            0x608a23 PyRun_StringFlags + 211
+24            0x6b3e9e PyRun_SimpleStringFlags + 62
+25            0x6bcb61 Py_RunMain + 1153
+26            0x6bc57d Py_BytesMain + 45
+27      0x7f3b032da1ca /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f3b032da1ca]
+28      0x7f3b032da28b __libc_start_main + 139
+29            0x657ce5 _start + 37
+2025-10-07 23:52:04,238|ERROR|root|create_process_exit_error|Process 4 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+2025-10-07 23:52:06,242|ERROR|root|create_process_exit_error|Process 1 (trtllm.attention_context) terminated by signal 6 (SIGABRT)
+[2025-10-07 23:52:13,587] [INFO] [Worker-7] [worker_7] Worker 7 initialized for trtllm.attention_context
+[2025-10-07 23:52:13,799] [INFO] [Worker-5] [worker_5] Worker 5 initialized for trtllm.attention_context
+[2025-10-07 23:52:15,443] [INFO] [Worker-4] [worker_4] Worker 4 initialized for trtllm.attention_context
+[2025-10-07 23:52:17,495] [INFO] [Worker-1] [worker_1] Worker 1 initialized for trtllm.attention_context
+2025-10-08 00:04:08,235|ERROR|root|parallel_run|trtllm.attention_context: Completed with 42 errors
+2025-10-08 00:04:08,243|ERROR|root|parallel_run|Error details saved to attention_context_20251007_233841/errors_trtllm.attention_context.json

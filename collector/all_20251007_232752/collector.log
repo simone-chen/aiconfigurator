@@ -1,0 +1,20 @@
+2025-10-07 23:27:52,948|INFO|root|main|Starting collection with 8 GPU processes
+2025-10-07 23:28:02,908|INFO|root|collect_trtllm|TensorRT LLM version: 1.0.0
+2025-10-07 23:28:02,961|INFO|root|collect_module_safe|Starting collection: trtllm.gemm_trt
+2025-10-07 23:28:02,965|INFO|root|collect_module_safe|Generated 18144 test cases for trtllm.gemm_trt
+2025-10-07 23:28:04,661|INFO|root|start_process|Started worker process 511 on device 0
+2025-10-07 23:28:04,663|INFO|root|start_process|Started worker process 512 on device 1
+2025-10-07 23:28:04,665|INFO|root|start_process|Started worker process 513 on device 2
+2025-10-07 23:28:04,667|INFO|root|start_process|Started worker process 514 on device 3
+2025-10-07 23:28:04,668|INFO|root|start_process|Started worker process 515 on device 4
+2025-10-07 23:28:04,670|INFO|root|start_process|Started worker process 516 on device 5
+2025-10-07 23:28:04,672|INFO|root|start_process|Started worker process 517 on device 6
+2025-10-07 23:28:04,673|INFO|root|start_process|Started worker process 518 on device 7
+2025-10-07 23:28:16,114|INFO|Worker-worker_0|worker|Worker 0 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,134|INFO|Worker-worker_7|worker|Worker 7 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,146|INFO|Worker-worker_5|worker|Worker 5 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,151|INFO|Worker-worker_2|worker|Worker 2 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,155|INFO|Worker-worker_6|worker|Worker 6 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,179|INFO|Worker-worker_4|worker|Worker 4 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,179|INFO|Worker-worker_1|worker|Worker 1 initialized for trtllm.gemm_trt
+2025-10-07 23:28:18,183|INFO|Worker-worker_3|worker|Worker 3 initialized for trtllm.gemm_trt

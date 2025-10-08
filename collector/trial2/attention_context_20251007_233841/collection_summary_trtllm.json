@@ -1,0 +1,473 @@
+{
+  "summary": {
+    "backend": "trtllm",
+    "version": "1.0.0",
+    "timestamp": "2025-10-08T00:04:08.679732",
+    "total_errors": 42,
+    "errors_by_module": {
+      "trtllm.attention_context": 42
+    },
+    "errors_by_type": {
+      "RuntimeError": 6,
+      "WorkerSignalCrash": 36
+    }
+  },
+  "errors": [
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "trtllm.attention_context_run_attention_torch_83548_[8, 16384, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[8, 16384, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:48:21.563123"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "trtllm.attention_context_run_attention_torch_80327_[8, 16384, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[8, 16384, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:48:21.953143"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "trtllm.attention_context_run_attention_torch_94233_[8, 16384, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[8, 16384, 96, 4, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:48:22.768366"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:48:24.010735"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:48:24.014741"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:48:24.018028"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "trtllm.attention_context_run_attention_torch_36785_[8, 16384, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[8, 16384, 96, 8, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:48:24.199454"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:48:26.022287"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 3,
+      "task_id": "trtllm.attention_context_run_attention_torch_65513_[16, 8192, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[16, 8192, 96, 2, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:49:16.329255"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "trtllm.attention_context_run_attention_torch_28535_[16, 8192, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "task_params": "[16, 8192, 96, 1, 128, 0, False, False, True, 'context_attention_perf.txt']",
+      "error_type": "RuntimeError",
+      "error_message": "CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/aiconfigurator/collector/collect.py\", line 120, in worker\n    result = func(*task, device)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/aiconfigurator/collector/trtllm/collect_attn.py\", line 173, in run_attention_torch\n    with torch.cuda.graph(g):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/graphs.py\", line 173, in __enter__\n    torch.cuda.synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1040, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA error: an illegal memory access was encountered\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+      "timestamp": "2025-10-07T23:49:16.608517"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 3,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:18.042103"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:18.045779"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:18.049137"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:20.056798"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 0,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:40.081034"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 1,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:40.084857"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 2,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:40.087980"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:49:40.091327"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:02.110064"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 3,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:04.114655"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:04.118138"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:06.122069"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 1,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:26.135548"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 2,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:26.139126"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:26.142207"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:30.146960"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 3,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:48.159529"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:48.163228"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 0,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:50.167264"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:50:50.170980"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:12.184752"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 3,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:14.189094"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 6,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:14.192962"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:14.196036"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:34.206009"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 1,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:36.210697"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 0,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:38.215259"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 2,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:51:38.219039"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 5,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:52:02.230360"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 7,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:52:02.234448"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 4,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:52:04.238148"
+    },
+    {
+      "module": "trtllm.attention_context",
+      "device_id": 1,
+      "task_id": "process_exit",
+      "task_params": null,
+      "error_type": "WorkerSignalCrash",
+      "error_message": "terminated by signal 6 (SIGABRT)",
+      "traceback": "",
+      "exit_code": -6,
+      "timestamp": "2025-10-07T23:52:06.242224"
+    }
+  ]
+}
