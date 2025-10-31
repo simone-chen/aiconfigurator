@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import logging
+from functools import cache
 
 import aiconfigurator.sdk.operations as ops
 from aiconfigurator.sdk import common, config
@@ -12,6 +13,7 @@ from aiconfigurator.sdk.utils import get_model_config_from_hf_id
 logger = logging.getLogger(__name__)
 
 
+@cache
 def _get_model_info(model_name: str) -> list:
     if model_name in common.SupportedHFModels:
         return get_model_config_from_hf_id(model_name)
