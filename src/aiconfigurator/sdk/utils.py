@@ -146,9 +146,9 @@ def _download_hf_config(hf_id: str) -> dict:
         headers["Authorization"] = f"Bearer {hf_token}"
 
     try:
-        req = urllib.request.Request(url, headers=headers, timeout=30)
-        with urllib.request.urlopen(req) as response:
-            return json.loads(response.read().decode())
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as response:
+            return json.load(response)
     except urllib.error.HTTPError as e:
         # Provide detailed error for any HTTP error code
         raise RuntimeError(
@@ -215,6 +215,7 @@ def get_model_config_from_hf_id(hf_id: str) -> list:
     """
     try:
         config = _download_hf_config(hf_id)
+        logger.info(f"Fetched config.json for {hf_id} from HuggingFace.")
         return _parse_hf_config_json(config)
     except Exception as e:
         logger.info(
