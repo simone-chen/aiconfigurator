@@ -27,6 +27,20 @@ def _filter_model_config_list(model_config_list: list[list]) -> list[list]:
     return [cfg for cfg in model_config_list if cfg[-1] == model_path]
 
 
+_WIDEEP_MOE_MODEL_NAMES: set[str] = {
+    "deepseek-ai/DeepSeek-V3",
+    "deepseek-ai/DeepSeek-V3.2",
+    "zai-org/GLM-5",
+    "MiniMaxAI/MiniMax-M2.5",
+    "moonshotai/Kimi-K2-Instruct",
+}
+
+
+def is_wideep_moe_model(model_name: str) -> bool:
+    """Return True if *model_name* needs wideep MoE collection (DEEPSEEK / DEEPSEEKV32 family)."""
+    return model_name in _WIDEEP_MOE_MODEL_NAMES
+
+
 # Raw model config lists — module-level so get_all_model_names() can read them
 # without instantiating test case objects or calling generator functions.
 
@@ -34,11 +48,12 @@ def _filter_model_config_list(model_config_list: list[list]) -> list[list]:
 _MOE_MODEL_CONFIGS: list[list] = [
     [4096, 14336, 2, 8, "mistralai/Mixtral-8x7B-v0.1"],  # mixtral_8x7b
     [6144, 16384, 2, 8, "mistralai/Mixtral-8x22B-v0.1"],  # mixtral_8x22b
-    [7168, 2048, 8, 256, "deepseek-ai/DeepSeek-V3"],  # deepseekv3, will have 1 shared expert
+    [7168, 2048, 8, 256, "deepseek-ai/DeepSeek-V3"],  # deepseekv3, will have 1 shared expert, dsv32
+    [6144, 2048, 8, 256, "zai-org/GLM-5"],  # glm-5 (DEEPSEEKV32 family, different hidden_size)
     [2048, 768, 8, 128, "Qwen/Qwen3-30B-A3B"],  # qwen3-moe, 30b-a3b
     [4096, 1536, 8, 128, "Qwen/Qwen3-235B-A22B"],  # qwen3-moe, 235b-a22b
     [6144, 2560, 8, 160, "Qwen/Qwen3-Coder-480B-A35B-Instruct"],  # qwen3-moe, 480b-a35b
-    [7168, 2048, 8, 384, "moonshotai/Kimi-K2-Instruct"],  # kimi k2
+    [7168, 2048, 8, 384, "moonshotai/Kimi-K2-Instruct"],  # kimi k2, k2.5
     [3072, 1536, 8, 256, "MiniMaxAI/MiniMax-M2.5"],  # minimax m2.5
     [2880, 2880, 4, 128, "openai/gpt-oss-120b"],
     [2880, 2880, 4, 32, "openai/gpt-oss-20b"],
@@ -61,6 +76,7 @@ _MLA_MODEL_CONFIGS: list[list] = [
 # already covered by _MLA_MODEL_CONFIGS above.
 _MLA_MODULE_MODEL_NAMES: list[str] = [
     "deepseek-ai/DeepSeek-V3.2",
+    "zai-org/GLM-5",
 ]
 
 # Mamba2: [d_model, d_state, d_conv, nheads, head_dim, n_groups, chunk_size, model_name]
