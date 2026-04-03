@@ -459,12 +459,12 @@ def run_moe_torch(
                     moe_module.forward(hidden_states, actual_logits)
             elif use_nvfp4:
                 if distributed == "power_law":
-                    for tw, ti in zip(topk_weights_list, topk_ids_list):
+                    for tw, ti in zip(topk_weights_list, topk_ids_list, strict=True):
                         _run_nvfp4_once(hidden_states[: tw.shape[0]], tw, ti)
                 else:
                     _run_nvfp4_once(hidden_states, topk_weights, topk_ids)
             elif distributed == "power_law":
-                for i, (tw, ti) in enumerate(zip(topk_weights_list, topk_ids_list)):
+                for i, (tw, ti) in enumerate(zip(topk_weights_list, topk_ids_list, strict=True)):
                     local_num_tokens = tw.shape[0]
                     _ = fused_experts(
                         hidden_states[:local_num_tokens],
