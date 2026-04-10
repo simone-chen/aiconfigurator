@@ -178,6 +178,21 @@ def _add_default_mode_arguments(parser):
         help="Enable chunked prefill for finer-grained context token sweep during optimization. "
         "When off (default), context token stride is aligned to ISL for faster sweeping.",
     )
+    parser.add_argument(
+        "--free-gpu-memory-fraction",
+        type=float,
+        default=1.0,
+        help="Fraction of free GPU memory TRT-LLM allocates for KV cache (default: 1.0). "
+        "Used to filter batch sizes that would exceed KV cache capacity.",
+    )
+    parser.add_argument(
+        "--max-seq-len",
+        type=int,
+        default=None,
+        help="TRT-LLM --max_seq_len setting (default: isl + osl). "
+        "Controls how many KV blocks TRT-LLM pre-allocates per sequence. "
+        "Set this to match your actual deployment for accurate KV cache capacity filtering.",
+    )
 
 
 def _add_experiments_mode_arguments(parser):
@@ -394,6 +409,22 @@ def _add_estimate_mode_arguments(parser):
         action="store_true",
         default=False,
         help="Print per-operation latency breakdown for mix step and generation-only step.",
+    )
+    parser.add_argument(
+        "--free-gpu-memory-fraction",
+        type=float,
+        default=0.9,
+        help="Fraction of free GPU memory available for KV cache (default: 0.9). "
+        "Used to estimate max concurrent sequences and warn when batch_size "
+        "exceeds KV cache capacity.",
+    )
+    parser.add_argument(
+        "--max-seq-len",
+        type=int,
+        default=None,
+        help="TRT-LLM --max_seq_len setting (default: isl + osl). "
+        "Controls how many KV blocks TRT-LLM pre-allocates per sequence. "
+        "Set this to match your actual deployment to get an accurate KV cache capacity warning.",
     )
 
 
@@ -613,6 +644,8 @@ def build_default_task_configs(
     nextn: int = 0,
     nextn_accept_rates: list[float] | None = None,
     enable_chunked_prefill: bool = False,
+    free_gpu_memory_fraction: float | None = None,
+    max_seq_len: int | None = None,
 ) -> dict[str, TaskConfig]:
     """Build agg and disagg task configs for default mode comparison.
 
@@ -701,6 +734,8 @@ def build_default_task_configs(
         "prefix": prefix,
         "database_mode": database_mode,
         "enable_chunked_prefill": enable_chunked_prefill,
+        "free_gpu_memory_fraction": free_gpu_memory_fraction,
+        "max_seq_len": max_seq_len,
     }
 
     # Create yaml_config to pass nextn and nextn_accept_rates if specified
@@ -1330,6 +1365,8 @@ def _run_estimate_mode(args):
         fmha_quant_mode=args.fmha_quant_mode,
         moe_quant_mode=args.moe_quant_mode,
         comm_quant_mode=args.comm_quant_mode,
+        free_gpu_memory_fraction=args.free_gpu_memory_fraction,
+        max_seq_len=args.max_seq_len,
     )
 
     if estimate_mode == "disagg":
@@ -1399,6 +1436,9 @@ def _run_estimate_mode(args):
         print(f"  (d) Memory:       {raw.get('(d)memory', 'N/A')} GB")
     print("=" * 60)
 
+    if result.kv_cache_warning:
+        logger.warning(result.kv_cache_warning)
+
     if args.print_per_ops_latency and result.per_ops_data:
         _print_per_ops_latency(result.per_ops_data)
 
@@ -1452,6 +1492,8 @@ def main(args):
             nextn=args.nextn,
             nextn_accept_rates=[float(x) for x in args.nextn_accept_rates.split(",")],
             enable_chunked_prefill=args.enable_chunked_prefill,
+            free_gpu_memory_fraction=args.free_gpu_memory_fraction,
+            max_seq_len=args.max_seq_len,
         )
     elif args.mode == "exp":
         try:
