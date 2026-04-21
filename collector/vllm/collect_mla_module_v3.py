@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-__compat__ = "vllm>=0.17.0,<0.19.0"
+__compat__ = "vllm>=0.19.0"
 
 """
 MLA Module Collector for vLLM — unified MLA and DSA benchmarking.
@@ -554,6 +554,23 @@ def _create_kv_cache_and_metadata(
         batch_spec, block_size, torch.device(device), arange_block_indices=True
     )
 
+    # TRT-LLM Gen MLA (and cutlass_mla) require the page table's block
+    # dimension to be a multiple of ``128 / block_size``; for block_size=64
+    # that means at least two blocks even when a request only fills one.
+    # Short sequences (seq_len <= block_size) otherwise produce block_num=1
+    # and the kernel raises ``Expected block_num % (128 / block_size) == 0``.
+    # Pad with zero-indexed blocks (they are not read for absent tokens).
+    required_divisor = max(1, 128 // block_size)
+    current_block_num = common_attn_metadata.block_table_tensor.shape[1]
+    if current_block_num % required_divisor != 0:
+        padded_block_num = ((current_block_num + required_divisor - 1) // required_divisor) * required_divisor
+        padding = torch.zeros(
+            (common_attn_metadata.block_table_tensor.shape[0], padded_block_num - current_block_num),
+            dtype=common_attn_metadata.block_table_tensor.dtype,
+            device=common_attn_metadata.block_table_tensor.device,
+        )
+        common_attn_metadata.block_table_tensor = torch.cat([common_attn_metadata.block_table_tensor, padding], dim=1)
+
     # Select the correct dtype for cache.
     # DSA fp8 uses a custom 656-byte ``fp8_ds_mla`` cache format that
     # stores quantised NoPE + per-128-element scales + BF16 RoPE.
@@ -761,16 +778,18 @@ def run_mla_module(
         )
 
     # 2b. Bind KV cache to the attention layer so forward() can access it.
-    #     MLAAttention registers itself in static_forward_context during
-    #     __init__, and reads self.kv_cache[virtual_engine] during forward.
+    #     vLLM >=0.19 reads self.kv_cache directly as a Tensor (the previous
+    #     per-virtual-engine list wrapping is gone); flashinfer_mla.forward_mqa,
+    #     mla_attention.forward_impl, and the sparse_attn_indexer custom op all
+    #     now typecheck Tensor, so a list wrapper raises.
     attn_layer_name = "model.layers.0.self_attn.attn"
     forward_ctx = vllm_config.compilation_config.static_forward_context
-    forward_ctx[attn_layer_name].kv_cache = [kv_cache]
+    forward_ctx[attn_layer_name].kv_cache = kv_cache
 
     # For DSA, also bind the indexer's KV cache.
     indexer_layer_name = "model.layers.0.self_attn.indexer.k_cache"
     if indexer_kv_cache is not None and indexer_layer_name in forward_ctx:
-        forward_ctx[indexer_layer_name].kv_cache = [indexer_kv_cache]
+        forward_ctx[indexer_layer_name].kv_cache = indexer_kv_cache
 
     # 3. Input tensors
     hidden_size = vllm_config.model_config.hf_config.hidden_size
@@ -811,15 +830,36 @@ def run_mla_module(
     try:
         with torch.inference_mode():
             attn_module.forward(positions, hidden_states, None)
+    except torch.cuda.OutOfMemoryError as e:
+        # Capacity limit, not a bug — skip so total_errors stays meaningful.
+        print(f"  Dry run OOM (skipping): {e}")
+        _cleanup()
+        return None
     except Exception as e:
         print(f"  Dry run failed: {e}")
         traceback.print_exc()
         _cleanup()
-        return None
+        # Propagate to collect.py's worker so the failure is recorded in the
+        # error queue. Swallowing here lets a whole op complete with zero
+        # rows while the pipeline reports success.
+        raise
 
     # 5. Benchmark
     def kernel_func():
         attn_module.forward(positions, hidden_states, None)
+
+    # DSA context captures a ~18 GiB flashmla-sparse scratch into the CUDA
+    # graph's private pool on big shapes. PyTorch doesn't reclaim that pool
+    # aggressively enough between tasks, so after a handful of big captures
+    # the per-worker private-pool retention saturates at ~146 GiB and every
+    # subsequent task — regardless of size — OOMs at
+    # ``WorkspaceManager._ensure_workspace_size``. Running eagerly avoids the
+    # private-pool retention entirely; the bias is <0.5% for DSA context
+    # because per-forward latency is tens of ms while graph launch overhead
+    # is tens of μs. Other ops (MLA context, both generation phases) keep
+    # graph capture because they don't hit this retention pattern and the
+    # overhead matters more for their faster kernels.
+    use_cuda_graph = not (attn_type == "dsa" and is_context)
 
     with benchmark_with_power(
         device=torch.device(device),
@@ -828,6 +868,7 @@ def run_mla_module(
         num_runs=test_ite,
         repeat_n=1,
         allow_graph_fail=True,
+        use_cuda_graph=use_cuda_graph,
     ) as results:
         pass
 
@@ -911,8 +952,24 @@ def run_mla_module_worker(
 
 
 def _cleanup():
-    torch.cuda.empty_cache()
+    # Release vLLM's WorkspaceManager singleton scratch buffers before
+    # returning to the worker loop. ``_ensure_workspace_size`` only grows —
+    # once a task demands N bytes, the manager pins N bytes for the worker's
+    # lifetime, so a single large task turns into a permanent allocator
+    # reservation that starves subsequent small tasks into OOM.
+    #
+    # The module-level ``_manager`` is private; vLLM offers no public
+    # teardown API. Nulling it drops the Python reference to the old
+    # manager (and its workspace tensors), and the next task's
+    # ``init_workspace_manager()`` call creates a fresh instance on demand.
+    import vllm.v1.worker.workspace as _ws_mod
+
+    _ws_mod._manager = None
+    # gc.collect() must run BEFORE empty_cache() — ``empty_cache`` only
+    # releases blocks with zero live allocations, so any Python-reachable
+    # tensors need to be dropped first or the pass is a no-op.
     gc.collect()
+    torch.cuda.empty_cache()
 
 
 # ═══════════════════════════════════════════════════════════════════════
