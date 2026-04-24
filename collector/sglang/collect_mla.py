@@ -19,7 +19,8 @@ from sglang.srt.mem_cache.memory_pool import MLATokenToKVPool, ReqToTokenPool
 from sglang.srt.model_executor.forward_batch_info import ForwardBatch, ForwardMode
 from sglang.srt.utils import is_blackwell
 
-from helper import benchmark_with_power, get_sm_version, log_perf
+from collector.helper import benchmark_with_power, get_sm_version, log_perf
+from collector.registry_types import PerfFile
 
 # Mocking for standalone collector script
 sglang.srt.layers.dp_attention._ATTN_TP_SIZE = 1
@@ -205,7 +206,6 @@ def get_context_mla_test_cases():
                                 10,
                                 6,
                                 True,
-                                "context_mla_perf.txt",
                             ]
                         )
     return test_cases
@@ -273,7 +273,6 @@ def get_generation_mla_test_cases():
                                 10,
                                 6,
                                 False,
-                                "generation_mla_perf.txt",
                             ]
                         )
     return test_cases
@@ -291,6 +290,7 @@ def run_mla(
     warming_up,
     test_ite,
     is_context_phase,
+    *,
     perf_filename,
     device="cuda:0",
 ):
@@ -561,9 +561,9 @@ if __name__ == "__main__":
     test_cases = get_context_mla_test_cases()
     for test_case in test_cases[0:10]:
         print(test_case)
-        run_mla(*test_case)
+        run_mla(*test_case, perf_filename=PerfFile.CONTEXT_MLA)
 
     test_cases = get_generation_mla_test_cases()
     for test_case in test_cases[0:10]:
         print(test_case)
-        run_mla(*test_case)
+        run_mla(*test_case, perf_filename=PerfFile.GENERATION_MLA)
